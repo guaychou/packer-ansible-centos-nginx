@@ -1,0 +1,19 @@
+---
+- name: nginx-testing provisioner
+  hosts: all
+  tasks: 
+    - name: install epel repository
+      yum: 
+         name:
+           - epel-release
+
+    - name: upgrade all packages
+      yum:
+        name: '*'
+        state: latest
+
+    - name: Install a list of packages
+      yum:
+        name:
+          - nginx
+        state: present
