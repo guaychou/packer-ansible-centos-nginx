@@ -1,0 +1,9 @@
+---
+- name: Ansible-role main master
+  hosts: all
+  gather_facts: no
+  pre_tasks:
+  - name: Install  python first
+    raw:  apk add --update python python-dev build-base
+  roles:
+    - install-python-alpine

@@ -1,0 +1,12 @@
+---
+
+- name: install python pip
+  apk:
+    name: 
+      - py-pip
+
+- name: Install python module that's needed in my project
+  pip:
+    name: 
+      - flask
+      - requests

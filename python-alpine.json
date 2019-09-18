@@ -1,0 +1,32 @@
+{
+    "builders": [{
+        "type": "docker",
+        "image": "alpine:latest",
+        "commit": true,
+        "changes": [
+            "ENTRYPOINT [\"\"]",
+            "CMD [\"/usr/bin/python\", \"/opt/webservice.py\"]",
+            "EXPOSE 5000"
+        ]
+    }],
+
+    "provisioners": [
+    {
+        "type": "file",
+        "source": "webservice.py",
+        "destination": "/opt/webservice.py"
+    },
+        
+
+    {
+        "type": "ansible",
+        "user": "root",
+        "playbook_file": "ansible-role/master.yml"
+    }],
+
+    "post-processors": [[ {
+        "type": "docker-tag",
+        "repository": "docker.io/lordchou/webservice-alpine",
+        "tag": "1.0.0"
+    } ]]
+}
