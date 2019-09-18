@@ -19,7 +19,7 @@
     {
         "type": "shell",
         "inline": [
-            "chmod 755 /usr/bin/masak2.sh"
+            "chmod 755 /usr/bin/masak.sh"
           ]
     },
 
