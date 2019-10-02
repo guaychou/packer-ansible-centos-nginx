@@ -42,6 +42,10 @@ jobs:
           name: Build docker images 2
           command: /opt/packer build ./centos-remaster.json
 
+      - run:
+          name: List docker images
+          command: docker images -a 
+
 workflows:
   version: 2
   build:
