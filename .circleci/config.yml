@@ -10,20 +10,16 @@ jobs:
       
       - run:
           name: Install packer to build
-          command: wget https://releases.hashicorp.com/packer/1.4.4/packer_1.4.4_linux_amd64.zip
+          command: sudo wget https://releases.hashicorp.com/packer/1.4.4/packer_1.4.4_linux_amd64.zip -O /opt/packer.zip
 
       - run:
           name: Unzip Packer
-          command: unzip ./packer_1.4.4_linux_amd64.zip
+          command: unzip /opt/packer.zip
 
       - run: 
           name: give executeable access
-          command: chmod +x ./packer ; sudo mv ./packer /opt/packer
+          command: sudo chmod +x /opt/packer 
       
-  packer-validate:
-    machine: true
-    working_directory: ~/workspace
-    steps:
       - checkout
       - run:
           name: validate python ansible
@@ -34,9 +30,6 @@ jobs:
 
 workflows:
   version: 2
-  build-and-deploy:
+  build:
     jobs:
-      - provisioning-vm
-      - packer-validate:
-          requires:
-            - provisioning-vm
+      - build
