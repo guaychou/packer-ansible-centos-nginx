@@ -15,7 +15,14 @@ jobs:
       - run:
           name: Unzip Packer
           command: unzip /opt/packer.zip
-
+      - run:
+          name: Listing packer
+          command: ls /opt
+      
+      - run:
+          name: Listing packer 2
+          command: ls ${pwd} 
+          
       - run: 
           name: give executeable access
           command: sudo chmod +x /opt/packer 
