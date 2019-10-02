@@ -18,7 +18,7 @@ jobs:
 
       - run: 
           name: give executeable access
-          command: chmod +x ./packer ; mv ./packer /opt/packer
+          command: chmod +x ./packer ; sudo mv ./packer /opt/packer
       
   packer-validate:
     machine: true
@@ -38,3 +38,5 @@ workflows:
     jobs:
       - provisioning-vm
       - packer-validate
+          requires:
+            - provisioning-vm
