@@ -1,10 +1,9 @@
 version: 2
 jobs:
-  validate:
+  Provision VM first:
     machine: true
     working_directory: ~/workspace
     steps:
-      
       - run:
           name: Install Ansible
           command: sudo apt-add-repository ppa:ansible/ansible ; sudo apt update ; sudo apt install ansible
@@ -21,8 +20,11 @@ jobs:
           name: give executeable access
           command: chmod +x ./packer
       
+  packer-validate:
+    machine: true
+    working_directory: ~/workspace
+    steps:
       - checkout
-
       - run:
           name: validate 
           command: ./packer validate ./python-alpine.json
@@ -35,3 +37,4 @@ workflows:
   build-and-deploy:
     jobs:
       - validate
+      - packer-validate
