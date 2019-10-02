@@ -18,7 +18,7 @@ jobs:
 
       - run: 
           name: give executeable access
-          command: chmod +x ./packer
+          command: chmod +x ./packer ; mv ./packer /opt/packer
       
   packer-validate:
     machine: true
@@ -27,10 +27,10 @@ jobs:
       - checkout
       - run:
           name: validate 
-          command: ./packer validate ./python-alpine.json
+          command: /opt/packer validate ./python-alpine.json
       - run:
           name: Validate snowflake
-          command: ./packer validate ./centos-remaster.json
+          command: /opt/packer validate ./centos-remaster.json
 
 workflows:
   version: 2
