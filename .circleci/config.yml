@@ -26,10 +26,10 @@ jobs:
     steps:
       - checkout
       - run:
-          name: validate 
+          name: validate python ansible
           command: /opt/packer validate ./python-alpine.json
       - run:
-          name: Validate snowflake
+          name: Validate centos remaster
           command: /opt/packer validate ./centos-remaster.json
 
 workflows:
@@ -38,5 +38,4 @@ workflows:
     jobs:
       - provisioning-vm
       - packer-validate
-          requires: 
-            - provisioning-vm
+          requires: provisioning-vm
