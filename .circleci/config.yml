@@ -1,11 +1,28 @@
 version: 2
 jobs:
   validate:
-    docker:
-      - image: hashicorp/packer:1.1.1
-    working_directory: ~/packer
+    machine: true
+    working_directory: ~/workspace
     steps:
+      
+      - run:
+          name: Install Ansible
+          command: apt install ansible
+      
+      - run:
+          name: Install packer to build
+          command: wget https://releases.hashicorp.com/packer/1.4.4/packer_1.4.4_linux_amd64.zip
+
+      - run:
+          name: Unzip Packer
+          command: unzip ./packer_1.4.4_linux_amd64.zip
+
+      - run: 
+          name: give executeable access
+          command: chmod +x ./packer
+      
       - checkout
+      
       - run:
           name: validate 
           command: packer validate ./python-alpine.json
