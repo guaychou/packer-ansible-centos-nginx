@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  provisioning-vm:
+  build:
     machine: true
     working_directory: ~/workspace
     steps:
