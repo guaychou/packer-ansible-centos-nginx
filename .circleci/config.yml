@@ -25,6 +25,7 @@ jobs:
           name: Listing packer 2
           command: ls ${pwd} 
   test: 
+    machine: true
     steps: 
       - run: 
           name: give executeable access
@@ -40,6 +41,7 @@ jobs:
           name: Validate centos remaster
           command: /opt/packer validate ./centos-remaster.json
   build: 
+    machine: true
     steps: 
       - run:
           name: Build docker images
