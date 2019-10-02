@@ -1,6 +1,6 @@
 version: 2
 jobs:
-  provisioning:
+  build:
     machine:
       image: ubuntu-1604:201903-01
     working_directory: ~/workspace
@@ -16,33 +16,24 @@ jobs:
       - run:
           name: Unzip Packer
           command: sudo unzip /opt/packer.zip -d /opt
-      - run:
-          name: Listing packer
-          command: ls /opt
-   
-  
-      - run:
-          name: Listing packer 2
-          command: ls ${pwd} 
-  test: 
-    machine: true
-    steps: 
+
       - run: 
           name: give executeable access
           command: sudo chmod +x /opt/packer 
+
       - run:
           name: docker login
           command: docker login -u $DOCKER_USERNAME -p `echo $DOCKER_PASSWORD | base64 -d`
+
       - checkout
+      
       - run:
           name: validate python ansible
           command: /opt/packer validate ./python-alpine.json
       - run:
           name: Validate centos remaster
           command: /opt/packer validate ./centos-remaster.json
-  build: 
-    machine: true
-    steps: 
+  
       - run:
           name: Build docker images
           command: /opt/packer build ./python-alpine.json
@@ -53,12 +44,6 @@ jobs:
 
 workflows:
   version: 2
-  provisioning-test-build:
+  build:
     jobs:
-      - provisioning
-      - test: 
-          requires: 
-            - provisioning
-      - build: 
-          requires:
-            - test
+      - build
