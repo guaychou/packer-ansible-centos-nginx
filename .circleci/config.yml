@@ -38,5 +38,5 @@ workflows:
     jobs:
       - provisioning-vm
       - packer-validate
-          requires:
+          requires: 
             - provisioning-vm
