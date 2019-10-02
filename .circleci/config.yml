@@ -37,5 +37,6 @@ workflows:
   build-and-deploy:
     jobs:
       - provisioning-vm
-      - packer-validate
-          requires: provisioning-vm
+      - packer-validate:
+          requires:
+            - provisioning-vm
