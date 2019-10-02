@@ -1,7 +1,8 @@
 version: 2
 jobs:
-  build:
-    machine: true
+  provisioning:
+    machine:
+      image: ubuntu-1604:201903-01
     working_directory: ~/workspace
     steps:
       - run:
@@ -18,11 +19,13 @@ jobs:
       - run:
           name: Listing packer
           command: ls /opt
-      
+   
+  
       - run:
           name: Listing packer 2
           command: ls ${pwd} 
-
+  test: 
+    steps: 
       - run: 
           name: give executeable access
           command: sudo chmod +x /opt/packer 
@@ -36,7 +39,8 @@ jobs:
       - run:
           name: Validate centos remaster
           command: /opt/packer validate ./centos-remaster.json
-  
+  build: 
+    steps: 
       - run:
           name: Build docker images
           command: /opt/packer build ./python-alpine.json
@@ -47,6 +51,12 @@ jobs:
 
 workflows:
   version: 2
-  build:
+  provisioning-test-build:
     jobs:
+      - provisioning
+      - test
+          requires: 
+            - provisioning
       - build
+          requires:
+            - test
