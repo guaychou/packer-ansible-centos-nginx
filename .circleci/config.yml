@@ -34,6 +34,14 @@ jobs:
       - run:
           name: Validate centos remaster
           command: /opt/packer validate ./centos-remaster.json
+  
+      - run:
+          name: Build docker images
+          command: /opt/packer build ./python-alpine.json
+      
+      - run:
+          name: Build docker images 2
+          command: /opt/packer build ./centos-remaster.json
 
 workflows:
   version: 2
