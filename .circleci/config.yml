@@ -26,7 +26,9 @@ jobs:
       - run: 
           name: give executeable access
           command: sudo chmod +x /opt/packer 
-      
+      - run:
+          name: docker login
+          command: docker login -u $DOCKER_USERNAME -p `echo $DOCKER_PASSWORD | base64 -d`
       - checkout
       - run:
           name: validate python ansible
