@@ -30,8 +30,7 @@
             "type": "docker-tag",
             "repository": "docker.io/lordchou/webservice-alpine",
             "tag": "1.0.0"
-            } ,
-        "docker-push"
+            } 
        ]
     ]
 }
