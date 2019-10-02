@@ -7,7 +7,7 @@ jobs:
       
       - run:
           name: Install Ansible
-          command: apt install ansible
+          command: sudo apt install ansible
       
       - run:
           name: Install packer to build
@@ -22,13 +22,13 @@ jobs:
           command: chmod +x ./packer
       
       - checkout
-      
+
       - run:
           name: validate 
-          command: packer validate ./python-alpine.json
+          command: ./packer validate ./python-alpine.json
       - run:
           name: Validate snowflake
-          command: packer validate ./centos-remaster.json
+          command: ./packer validate ./centos-remaster.json
 
 workflows:
   version: 2
